@@ -19,7 +19,7 @@ public class Game {
     private Parser parser;
     private GameMap map;
     private Player player;
-    private CommandSynonym commands;
+    private Config config;
     private boolean isRunning;
 
     /**
@@ -38,8 +38,8 @@ public class Game {
     public Game() {
         player = new Player();
         map = new GameMap();
-        commands = new CommandSynonym();
-        parser = new Parser(commands);
+        config = new Config();
+        parser = new Parser(config.getAliases());
         isRunning = true;
         createRooms();
 
@@ -105,7 +105,6 @@ public class Game {
 
             executeCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
     }
 
     // implementations of user commands:
@@ -155,11 +154,11 @@ public class Game {
 
     private void evaluateSettings(final CommandWord command) {
         if (command.getParam(0).equalsIgnoreCase("add")) {
-            this.commands.addCommand(command.getParam(1), command.getParam(2));
+            this.config.getAliases().addCommand(command.getParam(1), command.getParam(2));
             return;
         }
         if (command.getParam(0).equalsIgnoreCase("remove")) {
-            this.commands.removeCommand(command.getParam(1), command.getParam(2));
+            this.config.getAliases().removeCommand(command.getParam(1), command.getParam(2));
             return;
         }
         System.out.println("Set what?");
@@ -189,10 +188,10 @@ public class Game {
             System.out.println("You are lost. You are alone. You wander");
             System.out.println("around at the university.");
             System.out.println();
-            commands.printAvailableCommands();
+            config.getAliases().printAvailableCommands();
             System.out.println();
         } else {
-            Commands commandParam = commands.matchStringtoCommands(command.getParam(0));
+            Commands commandParam = config.getAliases().matchStringtoCommands(command.getParam(0));
             if (commandParam != Commands.EMPTY) {
                 System.out.println(commandParam.toString().toLowerCase() + " " + Commands.allowedParams(commandParam));
             } else {
@@ -232,6 +231,8 @@ public class Game {
     }
 
     private void terminateGame() {
+        config.writeConfig();
         isRunning = false;
+        System.out.println("Thank you for playing.  Good bye.");
     }
 }

@@ -114,4 +114,8 @@ class CommandSynonym {
             System.out.println("You are either trying to remove a basic command word, or the command category does not exist!");
         }
     }
+
+    public ArrayList<ArrayList<String>> getSynonyms() {
+        return synonyms;
+    }
 }
