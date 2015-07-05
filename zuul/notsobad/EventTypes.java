@@ -5,5 +5,5 @@ package zuul.notsobad;
  * "World of Zuul" is a very simple, text based adventure game.
  */
 enum EventTypes {
-    MOVE, TIME, ENTER
+    MOVE, TIME, ENTER, SEARCH
 }

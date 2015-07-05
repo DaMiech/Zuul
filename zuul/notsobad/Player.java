@@ -63,6 +63,19 @@ class Player extends Character {
         }
     }
 
+    public void searchRoom() {
+        notifyListeners(EventTypes.SEARCH);
+        currentLocation.printLoot();
+    }
+
+    public void pickStuffUp(final String itemName) {
+        for(Item currentItem : currentLocation.getLoot()){
+            if(currentItem.getName().equals(itemName)){
+                inventory.add(currentItem);
+            }
+        }
+    }
+
     public void useItem(Object params) {
 
     }
@@ -79,5 +92,25 @@ class Player extends Character {
      */
     public void setCurrentLocation(final Room room) {
         currentLocation = room;
+    }
+
+
+    public void printInventory() {
+        System.out.print("Inventory: ");
+        for(Item currentItem : inventory){
+            System.out.print(currentItem.getName()+", ");
+        }
+        System.out.println();
+    }
+
+
+    @Override
+    protected void onInsanity() {
+        System.out.println("You went insane. Your journey ends here.");
+    }
+
+    @Override
+    protected void onDeath() {
+        System.out.println("You died. Your journey ends here.");
     }
 }

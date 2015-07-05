@@ -34,4 +34,33 @@ abstract class Character {
         return currentSanity;
     }
 
+    public void changeCurrentHealth(final int change){
+        int attemptedChange = currentHealth+change;
+        if(attemptedChange<=0){
+            onDeath();
+        }else{
+            if(attemptedChange>maxHealth){
+                currentHealth = maxHealth;
+            }else{
+               currentHealth = attemptedChange;
+            }
+        }
+    }
+
+    public void changeCurrentSanity(final int change){
+        int attemptedChange = currentSanity+change;
+        if(attemptedChange<=0){
+            onInsanity();
+        }else{
+            if(attemptedChange>maxSanity){
+                currentSanity = maxSanity;
+            }else{
+                currentSanity = attemptedChange;
+            }
+        }
+    }
+
+    protected abstract void onInsanity();
+
+    protected abstract void onDeath();
 }

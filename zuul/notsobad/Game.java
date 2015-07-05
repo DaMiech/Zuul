@@ -122,19 +122,38 @@ public class Game {
                 quit(command);
                 break;
             case SEARCH:
+                player.searchRoom();
                 break;
             case SETTINGS:
                 evaluateSettings(command);
+                break;
+            case PICKUP:
+                pickStuffUp(command);
                 break;
             case TALK:
                 break;
             case USE:
                 useStuff(command);
                 break;
+            case STATS:
+                break;
+            case INVENTORY:
+                player.printInventory();
+                break;
+            case ATTACK:
+                break;
             default:
                 System.out.println("This is no valid command!");
                 break;
 
+        }
+    }
+
+    private void pickStuffUp(CommandWord command) {
+        if(command.hasSecondWord() && player.getCurrentLocation().containsItem(command.getParam(0))){
+            player.pickStuffUp(command.getParam(0));
+        }else{
+            System.out.println("Pick up what?");
         }
     }
 

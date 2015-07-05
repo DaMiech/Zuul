@@ -9,7 +9,7 @@ package zuul.notsobad;
  * Also contains an EMPTY constant for handling invalid commandlines.
  */
 enum Commands {
-    EMPTY, HELP, QUIT, SETTINGS, GO, SEARCH, USE, TALK, STATS, INVENTORY, ATTACK;
+    EMPTY, HELP, QUIT, SETTINGS, GO, SEARCH, USE, PICKUP, TALK, STATS, INVENTORY, ATTACK;
 
     /**
      * This method returns a String containing an explanation of the allowed parameters of a specified command
@@ -34,9 +34,18 @@ enum Commands {
             case TALK:
             case USE:
                 return "<gate x/itemname>";
+            case PICKUP:
+                return "<itemname>";
+            case STATS:
+                break;
+            case INVENTORY:
+                break;
+            case ATTACK:
+                break;
             default:
                 return "no parameters";
         }
+        return "";
     }
 
     /**

@@ -197,4 +197,28 @@ class Room {
         printGates();
         System.out.println();
     }
+
+    public void printLoot() {
+        if (loot.size()>0) {
+            System.out.print("You find: ");
+            for (Item currentItem : loot) {
+                System.out.print(currentItem.getName() + ", ");
+            }
+            System.out.println();
+        }else{
+            System.out.println("You find nothing.");
+        }
+    }
+
+   public boolean containsItem(final String name){
+       boolean result = false;
+       if (name != null){
+           for (Item currentItem : loot) {
+               if (currentItem.getName().equals(name)){
+                   result = true;
+               }
+           }
+       }
+       return result;
+   }
 }
