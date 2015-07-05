@@ -46,13 +46,6 @@ class Room {
         this.registeredEvents = new ArrayList<StoryEvent>();
     }
 
-    /**
-     * Creates a dummy-Room, to avoid nullpointers
-     */
-    public Room() {
-        this("Dummy-Room", "You should never encounter this");
-    }
-
     public String getDescription() {
         return description;
     }

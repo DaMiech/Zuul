@@ -6,10 +6,10 @@ class Player extends Character {
     private Room currentLocation;
     private ArrayList<StoryEvent> registeredEvents;
 
-    public Player() {
+    public Player(Room currentLocation) {
         super();
+        this.currentLocation = currentLocation;
         registeredEvents = new ArrayList<StoryEvent>();
-        currentLocation = new Room();
     }
 
     public Room getCurrentLocation() {

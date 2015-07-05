@@ -67,7 +67,7 @@ class GameMap {
                 return currentRoom;
             }
         }
-        return new Room();
+        return null;
     }
 
     public Room getselectedRoom() {
