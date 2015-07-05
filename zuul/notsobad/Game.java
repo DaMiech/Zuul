@@ -58,25 +58,25 @@ public class Game {
 
         // initialise room exits
         //Exits for outside
-        map.setselectedRoom(map.getRoomByName("outside"));
-        map.getselectedRoom().addExit(new Exit(map.getRoomByName("theatre"), Directions.EAST));
-        map.getselectedRoom().addExit(new Exit(map.getRoomByName("lab"), Directions.SOUTH));
-        map.getselectedRoom().addExit(new Exit(map.getRoomByName("pub"), Directions.WEST));
+        map.setSelectedRoom(map.getRoomByName("outside"));
+        map.getSelectedRoom().addExit(new Exit(map.getRoomByName("theatre"), Directions.EAST));
+        map.getSelectedRoom().addExit(new Exit(map.getRoomByName("lab"), Directions.SOUTH));
+        map.getSelectedRoom().addExit(new Exit(map.getRoomByName("pub"), Directions.WEST));
 
         //Exits for theatre
-        map.setselectedRoom(map.getRoomByName("theatre"));
+        map.setSelectedRoom(map.getRoomByName("theatre"));
         //no new Exits
 
         //Exits for pub
-        map.setselectedRoom(map.getRoomByName("pub"));
+        map.setSelectedRoom(map.getRoomByName("pub"));
         //no new Exits
 
         //Exits for lab
-        map.setselectedRoom(map.getRoomByName("lab"));
-        map.getselectedRoom().addExit(new Exit(map.getRoomByName("office"), Directions.EAST));
+        map.setSelectedRoom(map.getRoomByName("lab"));
+        map.getSelectedRoom().addExit(new Exit(map.getRoomByName("office"), Directions.EAST));
 
         //Exits for office
-        map.setselectedRoom(map.getRoomByName("office"));
+        map.setSelectedRoom(map.getRoomByName("office"));
         //no new Exits
 
 

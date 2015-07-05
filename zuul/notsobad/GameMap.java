@@ -73,13 +73,5 @@ class GameMap {
         return rooms.get(name);
     }
 
-    public Room getselectedRoom() {
-        return selectedRoom;
-    }
-
-    public void setselectedRoom(Room selectedRoom) {
-        this.selectedRoom = selectedRoom;
-    }
-
 
 }
