@@ -1,6 +1,8 @@
 package zuul.notsobad;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class is part of the "World of Zuul" application.
@@ -11,7 +13,7 @@ import java.util.ArrayList;
  * @author Michael
  */
 class GameMap {
-    ArrayList<Room> rooms;
+    Map<String, Room> rooms = new HashMap<String, Room>();
     private Room selectedRoom;
     private Room startRoom;
 
@@ -32,7 +34,6 @@ class GameMap {
     }
 
     public GameMap() {
-        rooms = new ArrayList<Room>();
     }
 
     /**
@@ -41,9 +42,16 @@ class GameMap {
      * @param newRoom the room to add to the map
      */
     public void addRoom(Room newRoom) {
-        if (this.getRoomByName(newRoom.getName()) == null) {
-            rooms.add(newRoom);
+        if (!this.hasRoom(newRoom.getName())) {
+            rooms.put(newRoom.getName(), newRoom);
         }
+    }
+
+    private boolean hasRoom(String name) {
+        return rooms.containsKey(name);
+    }
+    private boolean hasRoom(Room room) {
+        return rooms.containsValue(room);
     }
 
     /**
@@ -52,8 +60,8 @@ class GameMap {
      * @param room deletes this room
      */
     public void deleteRoom(Room room) {
-        if (rooms.contains(room)) {
-            rooms.remove(room);
+        if (this.hasRoom(room)) {
+            rooms.values().remove(room);
         }
     }
 
@@ -62,12 +70,7 @@ class GameMap {
      * @return dummy room if room was not found; else the specified room
      */
     public Room getRoomByName(final String name) {
-        for (Room currentRoom : rooms) {
-            if (currentRoom.getName().equals(name)) {
-                return currentRoom;
-            }
-        }
-        return null;
+        return rooms.get(name);
     }
 
     public Room getselectedRoom() {
