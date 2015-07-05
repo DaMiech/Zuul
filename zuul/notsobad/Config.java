@@ -1,10 +1,8 @@
 package zuul.notsobad;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * This class is part of the "World of Zuul" application.
@@ -12,7 +10,7 @@ import java.util.ArrayList;
  * <p>
  *
  *  This class reads the config file at the start of the game and initializes the defined aliases.
- *
+ *  It also overwrites the old config file with a new one after the user finishes playing.
  *
  * Created by Michael on 03.07.2015.
  */
@@ -25,7 +23,28 @@ public class Config {
     }
 
     private void readConfig() {
+        try(BufferedReader reader = new BufferedReader(new FileReader("zuulconfig.txt"))) {
+            String line = reader.readLine();
+            StringTokenizer tokenizer;
+            while (line != null) {
+                tokenizer = new StringTokenizer(line);
+                this.processTokenizedLine(tokenizer);
+                line = reader.readLine();
+            }
+        }catch(Exception exc){
+            System.out.println("Unable to read config file. "+exc.getMessage());
+        }
+    }
 
+    private void processTokenizedLine(final StringTokenizer tokenizer) {
+        if(tokenizer.hasMoreTokens()){
+            String command = tokenizer.nextToken();
+            if(aliases.matchStringtoCommands(command) != Commands.EMPTY){
+                while (tokenizer.hasMoreTokens()){
+                    aliases.addCommand(command, tokenizer.nextToken());
+                }
+            }
+        }
     }
 
     public CommandSynonym getAliases(){
@@ -33,7 +52,7 @@ public class Config {
     }
 
     public void   writeConfig(){
-        BufferedWriter writer;
+        BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream("zuulconfig.txt"), "utf-8"));
@@ -46,12 +65,10 @@ public class Config {
                 }
             }
         } catch (IOException ex) {
-            //This exception should never occur
-            System.out.println("A fatal error occurred while writing the config file.");
+            System.out.println("A fatal error occurred while writing the config file. "+ex.getMessage());
         } finally {
             try {writer.close();} catch (Exception ex) {
-                //This exception should never occur
-                System.out.println("A fatal error occurred while writing the config file.");
+                System.out.println("A fatal error occurred while writing the config file. "+ex.getMessage());
             }
         }
     }
