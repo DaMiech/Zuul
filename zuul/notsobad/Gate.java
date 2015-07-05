@@ -65,7 +65,7 @@ class Gate {
      * If the parameter is neither it returns a dummy-room
      *
      * @param room the room whose counterpart should be returned
-     * @return the counterpart if able, else dummy-room
+     * @return the counterpart if able, otherwise null
      */
     public Room getOther(final Room room) {
         if (room.equals(end)) {
@@ -74,7 +74,7 @@ class Gate {
             if (room.equals(start)) {
                 return end;
             }
-            return new Room();
+            return null;
         }
     }
 

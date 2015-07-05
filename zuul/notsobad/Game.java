@@ -36,13 +36,12 @@ public class Game {
      * Create the game and initialise its internal map.
      */
     public Game() {
-        player = new Player();
         map = new GameMap();
         config = new Config();
         parser = new Parser(config.getAliases());
         isRunning = true;
         createRooms();
-
+        player = new Player(map.getStartRoom());
     }
 
     /**
@@ -82,7 +81,6 @@ public class Game {
 
 
         map.setStartRoom(map.getRoomByName("outside"));
-        player.setCurrentLocation(map.getStartRoom());// start game outside
     }
 
     /**

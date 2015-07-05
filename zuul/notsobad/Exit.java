@@ -61,7 +61,7 @@ class Exit {
      * Creates an 'empty' Exit object leading to a dummy room
      */
     public Exit() {
-        this(new Room(), Directions.EMPTY);
+        this(null, Directions.EMPTY);
     }
 
     public boolean isEmpty() {
