@@ -69,8 +69,8 @@ class Player extends Character {
     }
 
     public void pickStuffUp(final String itemName) {
-        for(Item currentItem : currentLocation.getLoot()){
-            if(currentItem.getName().equals(itemName)){
+        for (Item currentItem : currentLocation.getLoot()) {
+            if (currentItem.getName().equals(itemName)) {
                 inventory.add(currentItem);
             }
         }
@@ -97,20 +97,20 @@ class Player extends Character {
 
     public void printInventory() {
         System.out.print("Inventory: ");
-        for(Item currentItem : inventory){
-            System.out.print(currentItem.getName()+", ");
+        for (Item currentItem : inventory) {
+            System.out.print(currentItem.getName() + ", ");
         }
         System.out.println();
     }
 
 
     @Override
-    protected void onInsanity() {
-        System.out.println("You went insane. Your journey ends here.");
-    }
-
-    @Override
-    protected void onDeath() {
-        System.out.println("You died. Your journey ends here.");
+    protected void onValueZero(final CharaVal value) {
+        switch (value) {
+            case HEALTH: System.out.println("You died!");
+                break;
+            case SANITY: System.out.println("You went insane!");
+                break;
+        }
     }
 }
